@@ -114,6 +114,14 @@
     <src.dir>src/main/java</src.dir>
     <test.additional.args />
 
+    <!-- SonarCloud additions -->
+    <sonar.organization>alessandrocortese</sonar.organization>
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+
+    <sonar.coverage.jacoco.xmlReportPaths>
+      ../tests/target/site/jacoco-aggregate/jacoco.xml
+    </sonar.coverage.jacoco.xmlReportPaths>
+
     <!-- dependencies -->
     <arquillian-cube.version>1.18.2</arquillian-cube.version>
     <arquillian-junit.version>1.8.0.Final</arquillian-junit.version>
@@ -191,6 +199,7 @@
     <maven-checkstyle-plugin.version>3.3.1</maven-checkstyle-plugin.version>
     <maven-clean-plugin.version>3.3.2</maven-clean-plugin.version>
     <maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
+   <jacoco-maven-plugin.version>0.8.10</jacoco-maven-plugin.version>
     <maven-dependency-plugin.version>3.6.1</maven-dependency-plugin.version>
     <maven-deploy-plugin.version>3.1.1</maven-deploy-plugin.version>
     <maven-install-plugin.version>3.1.1</maven-install-plugin.version>
@@ -1333,6 +1342,31 @@
             </plugin>
           </plugins>
         </pluginManagement>
+      </build>
+    </profile>
+
+    <!-- JaCoCo profile -->
+    <profile>
+      <id>JaCoCo-coverage</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>0.8.8</version>
+            <executions>
+              <execution>
+                <id>prepare-agent</id>
+                <goals>
+                  <goal>prepare-agent</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
       </build>
     </profile>
 
