@@ -115,8 +115,8 @@
     <test.additional.args />
 
     <!-- SonarCloud additions -->
-    <sonar.organization>alessandro-cortese</sonar.organization>
-    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+      <sonar.organization>alessandro-cortese</sonar.organization>
+      <sonar.host.url>https://sonarcloud.io</sonar.host.url>
 
     <sonar.coverage.jacoco.xmlReportPaths>
       ../tests/target/site/jacoco-aggregate/jacoco.xml
