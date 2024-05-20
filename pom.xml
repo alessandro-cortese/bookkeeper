@@ -144,7 +144,7 @@
     <jmh.version>1.37</jmh.version>
     <jmock.version>2.8.2</jmock.version>
     <jsoup.version>1.15.3</jsoup.version>
-    <junit.version>4.11</junit.version>
+    <junit.version>4.12</junit.version>
     <hamcrest.version>1.3</hamcrest.version>
     <junit5.version>5.10.2</junit5.version>
     <assertj-core.version>3.25.3</assertj-core.version>
@@ -941,6 +941,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.0.0-M4</version>
         <configuration>
           <argLine>-Xmx2G -Djava.net.preferIPv4Stack=true -Dio.netty.leakDetection.level=paranoid ${test.additional.args}</argLine>
           <redirectTestOutputToFile>${redirectTestOutputToFile}</redirectTestOutputToFile>
@@ -1334,7 +1335,6 @@
         </pluginManagement>
       </build>
     </profile>
-
 
     <profile>
       <id>apache-release</id>
