@@ -23,7 +23,7 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.apache.bookkeeper</groupId>
-  <version>4.17.0-SNAPSHOT</version>
+  <version>4.18.0-SNAPSHOT</version>
   <artifactId>bookkeeper</artifactId>
   <packaging>pom</packaging>
   <name>Apache BookKeeper :: Parent</name>
@@ -113,8 +113,12 @@
     <testRetryCount>2</testRetryCount>
     <src.dir>src/main/java</src.dir>
     <test.additional.args />
-    <sonar.coverage.jacoco.xmlReportPaths>../tests/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
 
+    <!-- SonarCloud additions -->
+    <sonar.organization>alessandrocortese</sonar.organization>
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+    <!-- JaCoCo additions -->
+    <sonar.coverage.jacoco.xmlReportPaths>../tests/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     <!-- dependencies -->
     <arquillian-cube.version>1.18.2</arquillian-cube.version>
     <arquillian-junit.version>1.8.0.Final</arquillian-junit.version>
@@ -145,7 +149,7 @@
     <jmh.version>1.37</jmh.version>
     <jmock.version>2.8.2</jmock.version>
     <jsoup.version>1.15.3</jsoup.version>
-    <junit.version>4.11</junit.version>
+    <junit.version>4.12</junit.version>
     <hamcrest.version>1.3</hamcrest.version>
     <junit5.version>5.10.2</junit5.version>
     <assertj-core.version>3.25.3</assertj-core.version>
@@ -155,8 +159,8 @@
     <log4j.version>2.18.0</log4j.version>
     <lz4.version>1.3.0</lz4.version>
     <mockito.version>3.3.3</mockito.version>
-    <netty.version>4.1.104.Final</netty.version>
-    <netty-iouring.version>0.0.24.Final</netty-iouring.version>
+    <netty.version>4.1.107.Final</netty.version>
+    <netty-iouring.version>0.0.25.Final</netty-iouring.version>
     <ostrich.version>9.1.3</ostrich.version>
     <prometheus.version>0.15.0</prometheus.version>
     <datasketches.version>0.8.3</datasketches.version>
@@ -192,12 +196,12 @@
     <maven-checkstyle-plugin.version>3.3.1</maven-checkstyle-plugin.version>
     <maven-clean-plugin.version>3.3.2</maven-clean-plugin.version>
     <maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
+    <sonar-maven-plugin.version>3.10.0.2594</sonar-maven-plugin.version>
     <maven-dependency-plugin.version>3.6.1</maven-dependency-plugin.version>
     <maven-deploy-plugin.version>3.1.1</maven-deploy-plugin.version>
     <maven-install-plugin.version>3.1.1</maven-install-plugin.version>
     <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
     <maven-javadoc-plugin.version>3.6.3</maven-javadoc-plugin.version>
-    <jacoco-maven-plugin.version>0.8.10</jacoco-maven-plugin.version>
     <maven-shade-plugin.version>3.5.1</maven-shade-plugin.version>
     <maven-source-plugin.version>3.3.0</maven-source-plugin.version>
     <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
@@ -218,20 +222,13 @@
   <!-- dependency definitions -->
   <dependencyManagement>
     <dependencies>
+
       <!-- provided dependencies -->
       <dependency>
         <groupId>com.github.spotbugs</groupId>
         <artifactId>spotbugs-annotations</artifactId>
         <version>${spotbugs-annotations.version}</version>
       </dependency>
-
-      <dependency>
-        <groupId>br.usp.each.saeg</groupId>
-        <artifactId>ba-dua</artifactId>
-        <version>0.8.0</version>
-        <type>pom</type>
-      </dependency>
-
       <dependency>
         <groupId>javax.annotation</groupId>
         <artifactId>javax.annotation-api</artifactId>
@@ -480,10 +477,10 @@
       </dependency>
 
       <dependency>
-         <!-- needed by ZooKeeper server -->
-         <groupId>org.xerial.snappy</groupId>
-         <artifactId>snappy-java</artifactId>
-         <version>${snappy.version}</version>
+        <!-- needed by ZooKeeper server -->
+        <groupId>org.xerial.snappy</groupId>
+        <artifactId>snappy-java</artifactId>
+        <version>${snappy.version}</version>
       </dependency>
 
       <!-- curator dependencies -->
@@ -884,15 +881,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-failsafe-plugin</artifactId>
-          <version>3.0.0-M4</version>
-          <executions>
-            <execution>
-            <goals>
-              <goal>integration-test</goal>
-              <goal>verify</goal>
-            </goals>
-            </execution>
-          </executions>
+          <version>${maven-surefire-plugin.version}</version>
         </plugin>
         <plugin>
           <groupId>com.github.maven-nar</groupId>
@@ -909,6 +898,7 @@
             <doclint>none</doclint>
           </configuration>
         </plugin>
+        <!-- Jacoco plugin isw2-->
         <plugin>
           <groupId>org.jacoco</groupId>
           <artifactId>jacoco-maven-plugin</artifactId>
@@ -948,6 +938,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
+        <!-- Commenting beacuse it can possibly interfere with Jacoco isw2
         <configuration>
           <argLine>-Xmx2G -Djava.net.preferIPv4Stack=true -Dio.netty.leakDetection.level=paranoid ${test.additional.args}</argLine>
           <redirectTestOutputToFile>${redirectTestOutputToFile}</redirectTestOutputToFile>
@@ -956,11 +947,20 @@
           <trimStackTrace>false</trimStackTrace>
           <forkedProcessTimeoutInSeconds>1800</forkedProcessTimeoutInSeconds>
           <rerunFailingTestsCount>${testRetryCount}</rerunFailingTestsCount>
-        </configuration>
+        </configuration>-->
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
+        <version>3.0.0-M4</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>integration-test</goal>
+              <goal>verify</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -1204,7 +1204,7 @@
                   <sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
                   <outputDirectory>${project.build.directory}/generated-sources/delombok</outputDirectory>
                   <formatPreferences>
-                    <pretty/>
+                    <pretty />
                   </formatPreferences>
                 </configuration>
               </execution>
@@ -1229,6 +1229,8 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
+            <!-- Commenting beacuse it can possibly interfere with Jacoco isw2-->
+            <!--
             <configuration>
               <argLine>-Xmx2G -Djava.net.preferIPv4Stack=true</argLine>
               <redirectTestOutputToFile>false</redirectTestOutputToFile>
@@ -1237,7 +1239,7 @@
               <forkedProcessTimeoutInSeconds>1800</forkedProcessTimeoutInSeconds>
               <trimStackTrace>false</trimStackTrace>
               <rerunFailingTestsCount>0</rerunFailingTestsCount>
-            </configuration>
+            </configuration>-->
           </plugin>
         </plugins>
       </build>
@@ -1250,22 +1252,15 @@
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
             <version>3.0.0-M4</version>
-            <configuration>
+            <!-- Commenting beacuse it can possibly interfere with Jacoco isw2-->
+            <!--<configuration>
               <argLine>-Xmx2G -Djava.net.preferIPv4Stack=true -Dio.netty.leakDetection.level=paranoid -Dbookkeeper.log.root.level=INFO -Dbookkeeper.log.root.appender=CONSOLE</argLine>
               <redirectTestOutputToFile>false</redirectTestOutputToFile>
               <forkCount>${forkCount.variable}</forkCount>
               <reuseForks>false</reuseForks>
               <forkedProcessTimeoutInSeconds>1800</forkedProcessTimeoutInSeconds>
               <trimStackTrace>false</trimStackTrace>
-            </configuration>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>integration-test</goal>
-                  <goal>verify</goal>
-                </goals>
-              </execution>
-            </executions>
+            </configuration>-->
           </plugin>
         </plugins>
       </build>
@@ -1346,9 +1341,12 @@
     <profile>
       <id>JaCoCo-coverage</id>
       <activation>
-        <activeByDefault>true</activeByDefault>
+        <activeByDefault>false</activeByDefault>
+        <!--<property>
+          <name>!skipCoverage</name>
+        </property>-->
       </activation>
-      <!--build>
+      <!--<build>
         <plugins>
           <plugin>
             <groupId>org.jacoco</groupId>
@@ -1364,7 +1362,7 @@
             </executions>
           </plugin>
         </plugins>
-      </build-->
+      </build>-->
       <build>
         <plugins>
           <plugin>
