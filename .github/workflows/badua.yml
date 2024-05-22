@@ -34,10 +34,10 @@ jobs:
       - name: Build and analyze bookkeeper project
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-        run: mvn clean verify -P badua
+        run: mvn clean verify -P BaDua-Coverage
       - name: Upload report
         uses: actions/upload-artifact@v3
         with:
           name: BaDuaCoverage_Report
-          path: ../target/badua.xml
-          if-no-files-found: error
+          path: bookkeeper-server/target/badua.xml
+          if-no-files-found: error 
