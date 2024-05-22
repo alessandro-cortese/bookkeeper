@@ -39,5 +39,5 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: BaDuaCoverage_Report
-          path: bookkeeper-server/target/badua.xml
+          path: ../target/badua.xml
           if-no-files-found: error
