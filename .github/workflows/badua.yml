@@ -34,7 +34,7 @@ jobs:
       - name: Build and analyze bookkeeper project
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-        run: mvn -B -P badua verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=alessandro-cortese_bookkeeper
+        run: mvn clean verify -P badua
       - name: Upload report
         uses: actions/upload-artifact@v3
         with:
