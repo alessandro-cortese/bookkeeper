@@ -67,6 +67,4 @@ public class BufferedChannelTest {
         assertEquals(new String(readData), new String(readData));
     }
 
-
-
 }
