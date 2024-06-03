@@ -37,8 +37,6 @@ public class AvailabilityOfEntriesConstructorsTest {
 
     private void createEntriesOfLedger() {
 
-
-
         switch (typeOfConstructor) {
             case ARRAY_LONG:
                 break;
@@ -100,7 +98,6 @@ public class AvailabilityOfEntriesConstructorsTest {
     public void constructorTest() {
 
         try{
-
             switch (this.typeOfConstructor) {
                 case ARRAY_LONG:
                     this.availabilityOfEntriesOfLedger = new AvailabilityOfEntriesOfLedger(this.entriesOfLedger);
@@ -123,7 +120,7 @@ public class AvailabilityOfEntriesConstructorsTest {
                     break;
             }
 
-
+            /*
             for(int i = 0; i < this.entriesOfLedger.length; i++){
                 for(long l : this.entriesOfLedger){
                     System.out.println("entry:" + l);
@@ -132,7 +129,7 @@ public class AvailabilityOfEntriesConstructorsTest {
                     }
                 }
             }
-
+            */
 
             if (!this.isExpectedFailulre) {
                 Assert.assertEquals(count(this.entriesOfLedger), this.availabilityOfEntriesOfLedger.getTotalNumOfAvailableEntries());
