@@ -368,7 +368,7 @@
             <configuration>
               <threads>4</threads>
               <targetClasses>
-                <!--param>org.apache.bookkeeper.bookie.BufferedChannel</param-->
+                <param>org.apache.bookkeeper.bookie.BufferedChannel</param>
                 <param>org.apache.bookkeeper.util.AvailabilityOfEntriesOfLedger</param>
               </targetClasses>
             </configuration>
