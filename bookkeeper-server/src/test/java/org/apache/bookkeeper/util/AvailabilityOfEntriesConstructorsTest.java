@@ -52,7 +52,7 @@ public class AvailabilityOfEntriesConstructorsTest {
     }
 
     @Parameterized.Parameters
-    public static Collection<Object[]> data() {
+    public static Collection<Object[]> getParameters() {
 
         long[] valid = new long[]{0L, 1L, 4L, 5L, 8L};
         long[] invalid = new long[]{0L, -1L, 4L, -5L, -8L};

@@ -42,7 +42,7 @@ public class AvailabilityOfEntriesOfLedgerGetUnavailableEntriesTest {
     }
 
     @Parameterized.Parameters
-    public static Collection<Object[]> data() {
+    public static Collection<Object[]> getParameters() {
 
         return Arrays.asList(new Object[][] {
                 //{startEntryID,        lastEntryId,    BITSET_STATE,           LIST_STATE,             EXCEPTION,      SEQUENCE,   NULLABLE}

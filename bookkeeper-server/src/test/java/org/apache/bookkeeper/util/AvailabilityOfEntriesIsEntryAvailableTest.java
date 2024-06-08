@@ -65,7 +65,7 @@ public class AvailabilityOfEntriesIsEntryAvailableTest {
     }
 
     @Test
-    public void testIsEntryAvailable() {
+    public void getParameters() {
         boolean result = availabilityOfEntriesOfLedger.isEntryAvailable(this.entry);
         if(!this.expectedFailure) {
             Assert.assertEquals(expectedResult, result);
