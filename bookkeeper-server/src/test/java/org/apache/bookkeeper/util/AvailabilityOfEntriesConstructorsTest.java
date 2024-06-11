@@ -119,18 +119,7 @@ public class AvailabilityOfEntriesConstructorsTest {
                     this.availabilityOfEntriesOfLedger = new AvailabilityOfEntriesOfLedger(this.byteBuf);
                     break;
             }
-
-            /*
-            for(int i = 0; i < this.entriesOfLedger.length; i++){
-                for(long l : this.entriesOfLedger){
-                    System.out.println("entry:" + l);
-                    if(this.availabilityOfEntriesOfLedger.isEntryAvailable(l)){
-                        System.out.println("entry inside:" + l);
-                    }
-                }
-            }
-            */
-
+            
             if (!this.isExpectedFailulre) {
                 Assert.assertEquals(count(this.entriesOfLedger), this.availabilityOfEntriesOfLedger.getTotalNumOfAvailableEntries());
             }

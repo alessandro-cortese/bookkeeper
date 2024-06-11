@@ -226,7 +226,7 @@ public class BufferedChannelWriteTest {
         }
 
     }
-    
+
     @After
     public void tearDownFile() {
 
