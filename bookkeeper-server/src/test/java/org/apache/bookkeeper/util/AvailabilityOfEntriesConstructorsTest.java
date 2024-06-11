@@ -119,7 +119,7 @@ public class AvailabilityOfEntriesConstructorsTest {
                     this.availabilityOfEntriesOfLedger = new AvailabilityOfEntriesOfLedger(this.byteBuf);
                     break;
             }
-            
+
             if (!this.isExpectedFailulre) {
                 Assert.assertEquals(count(this.entriesOfLedger), this.availabilityOfEntriesOfLedger.getTotalNumOfAvailableEntries());
             }
