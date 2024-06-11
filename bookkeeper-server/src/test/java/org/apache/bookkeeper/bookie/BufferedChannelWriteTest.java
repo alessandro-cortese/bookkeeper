@@ -226,26 +226,7 @@ public class BufferedChannelWriteTest {
         }
 
     }
-
-    /*
-    @Test
-    public void testWrite() {
-
-        ByteBuf byteBuf = Unpooled.buffer(this.srcSize, this.srcSize);
-        try{
-
-            BufferedChannel bufferedChannel = new BufferedChannel(UnpooledByteBufAllocator.DEFAULT, this.fileChannel, this.capacity, this.unpersistedBytesBound);
-            bufferedChannel.write(this.src);
-            int n = bufferedChannel.read(byteBuf, 0);
-            Assert.assertEquals(this.srcSize, n);
-
-        }catch (Exception e) {
-            Assert.assertTrue(this.isExepctedException);
-        }
-
-    }
-    */
-
+    
     @After
     public void tearDownFile() {
 
